@@ -1,0 +1,22 @@
+package com.ilkun.delivery;
+
+import com.ilkun.delivery.entity.Customer;
+import com.ilkun.delivery.entity.Order;
+import com.ilkun.delivery.service.SimpleOrderService;
+
+/**
+ *
+ * @author alexander-ilkun
+ */
+public class DeliveryApp {
+
+    public static void main(String[] args) {
+        Customer customer = null;
+        Order order;
+
+        SimpleOrderService orderService = new SimpleOrderService();
+        order = orderService.placeNewOrder(customer, 1, 2, 3);
+
+        System.out.println(order);
+    }
+}
