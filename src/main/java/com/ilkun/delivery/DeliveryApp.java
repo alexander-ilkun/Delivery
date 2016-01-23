@@ -10,7 +10,7 @@ import com.ilkun.delivery.service.SimpleOrderService;
  */
 public class DeliveryApp {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InstantiationException, IllegalAccessException {
         Customer customer = null;
         Order order;
 

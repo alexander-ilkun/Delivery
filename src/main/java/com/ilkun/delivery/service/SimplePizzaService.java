@@ -1,8 +1,8 @@
 package com.ilkun.delivery.service;
 
 import com.ilkun.delivery.domain.Pizza;
-import com.ilkun.delivery.repository.InMemPizzaRepository;
 import com.ilkun.delivery.repository.PizzaRepository;
+import com.ilkun.delivery.util.ServiceLocator;
 
 /**
  *
@@ -10,8 +10,12 @@ import com.ilkun.delivery.repository.PizzaRepository;
  */
 public class SimplePizzaService implements PizzaService {
 
-    private static final PizzaRepository pizzaRepository = new InMemPizzaRepository();
+    private final PizzaRepository pizzaRepository;
 
+    public SimplePizzaService() throws InstantiationException, IllegalAccessException {
+        pizzaRepository = (PizzaRepository) ServiceLocator.getInstance().createObject("pizzaRepository");
+    }
+    
     @Override
     public Pizza find(Integer id) {
         return pizzaRepository.find(id);
