@@ -1,7 +1,7 @@
 package com.ilkun.delivery;
 
-import com.ilkun.delivery.entity.Customer;
-import com.ilkun.delivery.entity.Order;
+import com.ilkun.delivery.domain.Customer;
+import com.ilkun.delivery.domain.Order;
 import com.ilkun.delivery.service.SimpleOrderService;
 
 /**

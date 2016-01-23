@@ -1,4 +1,4 @@
-package com.ilkun.delivery.entity;
+package com.ilkun.delivery.domain;
 
 /**
  *
@@ -57,5 +57,4 @@ public class Pizza {
     public void setType(PizzaType type) {
         this.type = type;
     }
-
 }

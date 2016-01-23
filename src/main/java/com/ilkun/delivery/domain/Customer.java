@@ -1,4 +1,4 @@
-package com.ilkun.delivery.entity;
+package com.ilkun.delivery.domain;
 
 /**
  *
@@ -33,5 +33,4 @@ public class Customer {
     public void setName(String name) {
         this.name = name;
     }
-
 }

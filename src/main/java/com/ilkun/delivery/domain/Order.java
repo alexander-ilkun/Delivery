@@ -1,4 +1,4 @@
-package com.ilkun.delivery.entity;
+package com.ilkun.delivery.domain;
 
 import java.util.List;
 
@@ -58,5 +58,4 @@ public class Order {
     public void setTotal(double total) {
         this.total = total;
     }
-
 }

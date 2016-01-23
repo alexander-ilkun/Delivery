@@ -1,27 +1,23 @@
 package com.ilkun.delivery.service;
 
-import com.ilkun.delivery.entity.Customer;
-import com.ilkun.delivery.entity.Order;
-import com.ilkun.delivery.entity.Pizza;
+import com.ilkun.delivery.domain.Customer;
+import com.ilkun.delivery.domain.Order;
+import com.ilkun.delivery.domain.Pizza;
+import com.ilkun.delivery.repository.InMemOrderRepository;
+import com.ilkun.delivery.repository.OrderRepository;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  *
  * @author alexander-ilkun
  */
-public class SimpleOrderService {
+public class SimpleOrderService implements OrderService {
 
-    private static final List<Order> orders = new ArrayList<>();
-    private static final Map<Integer, Pizza> pizzas = new HashMap<>();
-    static {
-        pizzas.put(1, new Pizza(1, "SEA", 4.0, Pizza.PizzaType.SEA));
-        pizzas.put(2, new Pizza(2, "MEAT", 4.0, Pizza.PizzaType.MEAT));
-        pizzas.put(3, new Pizza(3, "VEGETARIAN", 4.0, Pizza.PizzaType.VEGETARIAN));
-    }
+    private final OrderRepository orderRepository = new InMemOrderRepository();
+    private final PizzaService pizzaService = new SimplePizzaService();
     
+    @Override
     public Order placeNewOrder(Customer customer, Integer... pizzasID) {
         List<Pizza> pizzas = new ArrayList<>();
 
@@ -34,11 +30,11 @@ public class SimpleOrderService {
         return newOrder;
     }
 
-    public Pizza getPizzaByID(Integer id) {
-        return pizzas.get(id);
+    private Pizza getPizzaByID(Integer id) {
+        return pizzaService.find(id);
     }
 
     private void saveOrder(Order newOrder) {
-        orders.add(newOrder);
+        orderRepository.save(newOrder);
     }
 }
