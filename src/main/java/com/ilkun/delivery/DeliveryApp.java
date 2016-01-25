@@ -2,7 +2,10 @@ package com.ilkun.delivery;
 
 import com.ilkun.delivery.domain.Customer;
 import com.ilkun.delivery.domain.Order;
-import com.ilkun.delivery.service.SimpleOrderService;
+import com.ilkun.delivery.infrastructure.ApplicationContext;
+import com.ilkun.delivery.infrastructure.JavaConfig;
+import com.ilkun.delivery.infrastructure.JavaConfigApplicationContext;
+import com.ilkun.delivery.service.OrderService;
 
 /**
  *
@@ -10,13 +13,15 @@ import com.ilkun.delivery.service.SimpleOrderService;
  */
 public class DeliveryApp {
 
-    public static void main(String[] args) throws InstantiationException, IllegalAccessException {
+    public static void main(String[] args) throws Exception {
         Customer customer = null;
-        Order order;
 
-        SimpleOrderService orderService = new SimpleOrderService();
-        order = orderService.placeNewOrder(customer, 1, 2, 3);
+        ApplicationContext context = new JavaConfigApplicationContext(new JavaConfig());
+
+        OrderService orderService = (OrderService) context.getBean("orderService");
+        Order order = orderService.placeNewOrder(customer, 1, 2, 3);
 
         System.out.println(order);
+
     }
 }

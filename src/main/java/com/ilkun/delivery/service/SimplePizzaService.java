@@ -2,7 +2,6 @@ package com.ilkun.delivery.service;
 
 import com.ilkun.delivery.domain.Pizza;
 import com.ilkun.delivery.repository.PizzaRepository;
-import com.ilkun.delivery.util.ServiceLocator;
 
 /**
  *
@@ -12,8 +11,8 @@ public class SimplePizzaService implements PizzaService {
 
     private final PizzaRepository pizzaRepository;
 
-    public SimplePizzaService() throws InstantiationException, IllegalAccessException {
-        pizzaRepository = (PizzaRepository) ServiceLocator.getInstance().createObject("pizzaRepository");
+    public SimplePizzaService(PizzaRepository pizzaRepository) {
+        this.pizzaRepository = pizzaRepository;
     }
     
     @Override

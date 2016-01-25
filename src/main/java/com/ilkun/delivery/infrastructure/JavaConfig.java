@@ -1,7 +1,8 @@
-package com.ilkun.delivery.util;
+package com.ilkun.delivery.infrastructure;
 
 import com.ilkun.delivery.repository.InMemOrderRepository;
 import com.ilkun.delivery.repository.InMemPizzaRepository;
+import com.ilkun.delivery.service.SimpleOrderService;
 import com.ilkun.delivery.service.SimplePizzaService;
 import java.util.HashMap;
 import java.util.Map;
@@ -18,6 +19,7 @@ public class JavaConfig implements Config {
         ifc2Class.put("pizzaRepository", InMemPizzaRepository.class);
         ifc2Class.put("orderRepository", InMemOrderRepository.class);
         ifc2Class.put("pizzaService", SimplePizzaService.class);
+        ifc2Class.put("orderService", SimpleOrderService.class);
     }
 
     @Override

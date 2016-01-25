@@ -4,7 +4,6 @@ import com.ilkun.delivery.domain.Customer;
 import com.ilkun.delivery.domain.Order;
 import com.ilkun.delivery.domain.Pizza;
 import com.ilkun.delivery.repository.OrderRepository;
-import com.ilkun.delivery.util.ServiceLocator;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,9 +16,9 @@ public class SimpleOrderService implements OrderService {
     private final OrderRepository orderRepository;
     private final PizzaService pizzaService;
     
-    public SimpleOrderService() throws InstantiationException, IllegalAccessException {
-        orderRepository = (OrderRepository) ServiceLocator.getInstance().createObject("orderRepository");
-        pizzaService = (PizzaService) ServiceLocator.getInstance().createObject("pizzaService");
+    public SimpleOrderService(OrderRepository orderRepository, PizzaService pizzaService) {
+        this.orderRepository = orderRepository;
+        this.pizzaService = pizzaService;
     }
     
     @Override
