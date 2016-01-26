@@ -1,5 +1,6 @@
 package com.ilkun.delivery.infrastructure;
 
+import com.ilkun.delivery.infrastructure.annotations.PostCreate;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
@@ -28,7 +29,6 @@ public class JavaConfigApplicationContext implements ApplicationContext {
             return bean;
         }
 
-        System.out.println(beanName);
         BeanBuilder builder = new BeanBuilder(type);
         builder.construct();
         builder.afterConstruct();
@@ -44,11 +44,11 @@ public class JavaConfigApplicationContext implements ApplicationContext {
 
         private final Class<?> type;
         private Object bean;
-        
+
         public BeanBuilder(Class<?> type) {
             this.type = type;
         }
-        
+
         public void construct() throws Exception {
             Constructor<?> constructor = type.getConstructors()[0];
             Parameter[] parameters = constructor.getParameters();
@@ -67,12 +67,21 @@ public class JavaConfigApplicationContext implements ApplicationContext {
         }
 
         public void afterConstruct() {
-            // TODO : Annotation PostCreate
             Class<?> clazz = bean.getClass();
-            Method method;
             try {
-                method = clazz.getMethod("init");
-                method.invoke(bean);
+                Method initMethod = clazz.getMethod("init");
+                initMethod.invoke(bean);
+            } catch (Exception ex) {
+                //ex.printStackTrace();
+            }
+            try {
+                Method[] methods = clazz.getMethods();
+                for (Method curMethod : methods) {
+                    if (curMethod.isAnnotationPresent(PostCreate.class) && 
+                            !curMethod.getName().equals("init")) {
+                        curMethod.invoke(bean);
+                    }
+                }
             } catch (Exception ex) {
                 //ex.printStackTrace();
             }
