@@ -1,6 +1,7 @@
 package com.ilkun.delivery.infrastructure;
 
 import com.ilkun.delivery.infrastructure.annotations.PostCreate;
+import com.ilkun.delivery.infrastructure.proxy.BenchmarkProxy;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
@@ -31,8 +32,9 @@ public class JavaConfigApplicationContext implements ApplicationContext {
 
         BeanBuilder builder = new BeanBuilder(type);
         builder.construct();
-        builder.afterConstruct();
         builder.createProxy();
+        builder.callPostConstruct();
+        builder.callInit();
         bean = builder.build();
 
         pool.put(beanName, bean);
@@ -44,7 +46,8 @@ public class JavaConfigApplicationContext implements ApplicationContext {
 
         private final Class<?> type;
         private Object bean;
-
+        private Object proxy;
+        
         public BeanBuilder(Class<?> type) {
             this.type = type;
         }
@@ -66,14 +69,8 @@ public class JavaConfigApplicationContext implements ApplicationContext {
 
         }
 
-        public void afterConstruct() {
+        public void callPostConstruct() {
             Class<?> clazz = bean.getClass();
-            try {
-                Method initMethod = clazz.getMethod("init");
-                initMethod.invoke(bean);
-            } catch (Exception ex) {
-                //ex.printStackTrace();
-            }
             try {
                 Method[] methods = clazz.getMethods();
                 for (Method curMethod : methods) {
@@ -87,12 +84,22 @@ public class JavaConfigApplicationContext implements ApplicationContext {
             }
         }
 
+        public void callInit() {
+            Class<?> clazz = bean.getClass();
+            try {
+                Method initMethod = clazz.getMethod("init");
+                initMethod.invoke(bean);
+            } catch (Exception ex) {
+                //ex.printStackTrace();
+            }
+        }
+        
         public void createProxy() {
+            proxy = BenchmarkProxy.tryCreateBenchmarkProxy(bean);
         }
 
         public Object build() {
-            return bean;
+            return proxy;
         }
     }
-
 }
