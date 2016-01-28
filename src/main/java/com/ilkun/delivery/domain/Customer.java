@@ -1,5 +1,7 @@
 package com.ilkun.delivery.domain;
 
+import java.util.List;
+
 /**
  *
  * @author alexander-ilkun
@@ -8,8 +10,10 @@ public class Customer {
 
     private Integer id;
     private String name;
-
-    public Customer(int id, String name) {
+    private List<Address> addresses;
+    private BonusCard bonusCard;
+    
+    public Customer(Integer id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -32,5 +36,21 @@ public class Customer {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<Address> getAddresses() {
+        return addresses;
+    }
+
+    public void setAddresses(List<Address> addresses) {
+        this.addresses = addresses;
+    }
+
+    public BonusCard getBonusCard() {
+        return bonusCard;
+    }
+
+    public void setBonusCard(BonusCard bonusCard) {
+        this.bonusCard = bonusCard;
     }
 }

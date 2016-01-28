@@ -8,5 +8,7 @@ import com.ilkun.delivery.domain.Order;
  */
 public interface OrderRepository {
 
+    Order find(Integer id);
+    
     Order save(Order order);
 }

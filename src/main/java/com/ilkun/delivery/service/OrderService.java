@@ -9,5 +9,5 @@ import com.ilkun.delivery.domain.Order;
  */
 public interface OrderService {
 
-    Order placeNewOrder(Customer customer, Integer... pizzasID);
+    Order placeNewOrder(Customer customer, Integer[] pizzasID, Integer[] pizzasNumber);
 }

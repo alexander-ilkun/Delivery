@@ -33,7 +33,7 @@ public class JavaConfigApplicationContext implements ApplicationContext {
         BeanBuilder builder = new BeanBuilder(type);
         builder.construct();
         builder.createProxy();
-        builder.callPostConstruct();
+        builder.callPostCreate();
         builder.callInit();
         bean = builder.build();
 
@@ -69,7 +69,7 @@ public class JavaConfigApplicationContext implements ApplicationContext {
 
         }
 
-        public void callPostConstruct() {
+        public void callPostCreate() {
             Class<?> clazz = bean.getClass();
             try {
                 Method[] methods = clazz.getMethods();

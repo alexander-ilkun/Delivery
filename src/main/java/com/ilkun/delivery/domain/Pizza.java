@@ -13,7 +13,7 @@ public class Pizza {
     private double price;
     private PizzaType type;
 
-    public Pizza(int id, String name, double price, PizzaType type) {
+    public Pizza(Integer id, String name, double price, PizzaType type) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -24,6 +24,11 @@ public class Pizza {
         this.name = name;
         this.price = price;
         this.type = type;
+    }
+
+    @Override
+    public String toString() {
+        return "Pizza{" + "id=" + id + ", name=" + name + ", price=" + price + ", type=" + type + '}';
     }
 
     public Integer getId() {

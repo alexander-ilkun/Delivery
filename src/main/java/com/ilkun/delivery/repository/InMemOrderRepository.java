@@ -1,8 +1,8 @@
 package com.ilkun.delivery.repository;
 
 import com.ilkun.delivery.domain.Order;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -10,11 +10,18 @@ import java.util.List;
  */
 public class InMemOrderRepository implements OrderRepository {
 
-    private static final List<Order> orders = new ArrayList<>();
+    private static int curId = 1;
+    private static final Map<Integer, Order> orders = new HashMap<>();
 
     @Override
+    public Order find(Integer id) {
+        return orders.get(id);
+    }
+    
+    @Override
     public Order save(Order order) {
-        orders.add(order);
+        order.setId(curId);
+        orders.put(curId++, order);
         return order;
     }
 }
