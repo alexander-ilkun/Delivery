@@ -14,13 +14,8 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class SpringDeliveryApp {
 
     public static void main(String[] args) {
-        ConfigurableApplicationContext repositoryContext
-                = new ClassPathXmlApplicationContext(
-                    "repositoryContext.xml");
         ConfigurableApplicationContext appContext
-                = new ClassPathXmlApplicationContext(new String[]{
-                    "appContext.xml"},
-                    repositoryContext);
+                = new ClassPathXmlApplicationContext("appContext.xml");
         CustomerService customerService = appContext.getBean(CustomerService.class);
         OrderService orderService = appContext.getBean(OrderService.class);
 
@@ -30,7 +25,6 @@ public class SpringDeliveryApp {
         System.out.println(order);
         
         appContext.close();
-        repositoryContext.close();
     }
 
 }
