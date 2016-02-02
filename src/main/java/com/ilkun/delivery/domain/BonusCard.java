@@ -33,4 +33,12 @@ public class BonusCard {
     public void setAmount(double amount) {
         this.amount = amount;
     }
+
+    public void withdraw(double withdrawAmount) {
+        amount -= withdrawAmount;
+    }
+
+    public void deposit(double depositAmount) {
+        amount += depositAmount;
+    }
 }

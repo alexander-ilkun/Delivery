@@ -7,7 +7,26 @@
           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
 ">
 
-    <bean id="pizzaRepo" class="com.ilkun.delivery.repository.InMemPizzaRepository"
-        init-method="init" />
+    <bean id="pizzaService" class="com.ilkun.delivery.service.SimplePizzaService">
+        <constructor-arg ref="pizzaRepository" />
+    </bean>
+    <bean id="orderService" class="com.ilkun.delivery.service.SimpleOrderService">
+        <constructor-arg ref="orderRepository" />
+        <constructor-arg ref="pizzaService" />
+        <constructor-arg ref="discountManager" />
+    </bean>
+    <bean id="customerService" class="com.ilkun.delivery.service.SimpleCustomerService">
+        <constructor-arg index="0" ref="customerRepository" />
+        <constructor-arg index="1" ref="addressService" />
+        <constructor-arg index="2" ref="bonusCardService" />
+    </bean>
+    <bean id="addressService" class="com.ilkun.delivery.service.SimpleAddressService">
+        <constructor-arg ref="addressRepository" />
+    </bean>
+    <bean id="bonusCardService" class="com.ilkun.delivery.service.SimpleBonusCardService">
+        <constructor-arg ref="bonusCardRepository" />
+    </bean>
+
+    <bean name="discountManager" class="com.ilkun.delivery.domain.SimpleDiscountManager" />
 
 </beans>

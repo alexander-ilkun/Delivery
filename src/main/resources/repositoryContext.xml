@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+          http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
+">
+
+    <bean id="orderRepository" class="com.ilkun.delivery.repository.InMemOrderRepository" />
+    <bean id="pizzaRepository" class="com.ilkun.delivery.repository.InMemPizzaRepository">
+        <property name="pizzas">
+            <map>
+                <entry key="1">
+                    <bean class="com.ilkun.delivery.domain.Pizza" >
+                        <constructor-arg value="1" />
+                        <constructor-arg value="Sea" />
+                        <constructor-arg value="4.0" />
+                        <constructor-arg value="SEA" />
+                    </bean>
+                </entry>
+                <entry key="2">
+                    <bean class="com.ilkun.delivery.domain.Pizza" >
+                        <constructor-arg value="2" />
+                        <constructor-arg value="Meat" />
+                        <constructor-arg value="4.0" />
+                        <constructor-arg value="MEAT" />
+                    </bean>
+                </entry>
+                <entry key="3">
+                    <bean class="com.ilkun.delivery.domain.Pizza" >
+                        <constructor-arg value="3" />
+                        <constructor-arg value="Vegetarian" />
+                        <constructor-arg value="4.0" />
+                        <constructor-arg value="VEGETARIAN" />
+                    </bean>
+                </entry>
+            </map>
+        </property>
+    </bean>
+    <bean id="customerRepository" class="com.ilkun.delivery.repository.InMemCustomerRepository"
+        init-method="init" />
+    <bean id="addressRepository" class="com.ilkun.delivery.repository.InMemAddressRepository"
+        init-method="init" />
+    <bean id="bonusCardRepository" class="com.ilkun.delivery.repository.InMemBonusCardRepository"
+        init-method="init" />
+
+</beans>

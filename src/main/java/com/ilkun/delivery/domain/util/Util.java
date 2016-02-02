@@ -1,4 +1,4 @@
-package com.ilkun.delivery.util;
+package com.ilkun.delivery.domain.util;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

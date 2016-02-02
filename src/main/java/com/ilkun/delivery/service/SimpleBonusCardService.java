@@ -19,13 +19,13 @@ public class SimpleBonusCardService implements BonusCardService {
 
     @Override
     public BonusCard withdraw(BonusCard bonusCard, double withdrawAmount) {
-        bonusCard.setAmount(bonusCard.getAmount() - withdrawAmount);
+        bonusCard.withdraw(withdrawAmount);
         return bonusCardRepository.save(bonusCard);
     }
 
     @Override
     public BonusCard deposit(BonusCard bonusCard, double depositAmount) {
-        bonusCard.setAmount(bonusCard.getAmount() + depositAmount);
+        bonusCard.deposit(depositAmount);
         return bonusCardRepository.save(bonusCard);
     }
     
