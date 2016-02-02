@@ -8,17 +8,21 @@ import com.ilkun.delivery.domain.Pizza;
 import com.ilkun.delivery.repository.OrderRepository;
 import java.util.HashMap;
 import java.util.Map;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author alexander-ilkun
  */
+@Service
 public class SimpleOrderService implements OrderService {
 
     private final OrderRepository orderRepository;
     private final PizzaService pizzaService;
     private final DiscountManager discountManager;
     
+    @Autowired
     public SimpleOrderService(OrderRepository orderRepository,
             PizzaService pizzaService, DiscountManager discountManager) {
         this.orderRepository = orderRepository;

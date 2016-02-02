@@ -6,14 +6,17 @@ import com.ilkun.delivery.domain.Customer;
 import com.ilkun.delivery.repository.CustomerRepository;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-
+@Service
 public class SimpleCustomerService implements CustomerService {
 
     private final CustomerRepository customerRepository;
     private final AddressService addressService;
     private final BonusCardService bonusCardService;
     
+    @Autowired
     public SimpleCustomerService(CustomerRepository customerRepository,
             AddressService addressService, BonusCardService bonusCardService) {
         this.customerRepository = customerRepository;

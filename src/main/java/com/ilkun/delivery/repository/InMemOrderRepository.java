@@ -3,11 +3,13 @@ package com.ilkun.delivery.repository;
 import com.ilkun.delivery.domain.Order;
 import java.util.HashMap;
 import java.util.Map;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author alexander-ilkun
  */
+@Repository
 public class InMemOrderRepository implements OrderRepository {
 
     private static int curId = 1;

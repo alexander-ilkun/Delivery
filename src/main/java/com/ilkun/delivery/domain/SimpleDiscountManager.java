@@ -2,8 +2,9 @@ package com.ilkun.delivery.domain;
 
 import com.ilkun.delivery.domain.util.Util;
 import java.util.Map;
+import org.springframework.stereotype.Component;
 
-
+@Component
 public class SimpleDiscountManager implements DiscountManager {
 
     private static final int PRECISION = 2;

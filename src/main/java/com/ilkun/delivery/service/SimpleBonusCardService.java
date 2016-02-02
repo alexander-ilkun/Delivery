@@ -2,12 +2,15 @@ package com.ilkun.delivery.service;
 
 import com.ilkun.delivery.domain.BonusCard;
 import com.ilkun.delivery.repository.BonusCardRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-
+@Service
 public class SimpleBonusCardService implements BonusCardService {
 
     private final BonusCardRepository bonusCardRepository;
 
+    @Autowired
     public SimpleBonusCardService(BonusCardRepository bonusCardRepository) {
         this.bonusCardRepository = bonusCardRepository;
     }

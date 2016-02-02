@@ -21,8 +21,8 @@ public class SpringDeliveryApp {
                 = new ClassPathXmlApplicationContext(new String[]{
                     "appContext.xml"},
                     repositoryContext);
-        CustomerService customerService = (CustomerService) appContext.getBean("customerService");
-        OrderService orderService = (OrderService) appContext.getBean("orderService");
+        CustomerService customerService = appContext.getBean(CustomerService.class);
+        OrderService orderService = appContext.getBean(OrderService.class);
 
         Customer customer = customerService.find(1);
         Order order = orderService.placeNewOrder(customer, new Integer[]{1, 2, 3}, new Integer[]{1, 2, 3});

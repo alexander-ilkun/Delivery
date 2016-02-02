@@ -3,13 +3,16 @@ package com.ilkun.delivery.repository;
 import com.ilkun.delivery.domain.BonusCard;
 import java.util.HashMap;
 import java.util.Map;
+import javax.annotation.PostConstruct;
+import org.springframework.stereotype.Repository;
 
-
+@Repository
 public class InMemBonusCardRepository implements BonusCardRepository {
 
     private static int curId = 1;
     private static final Map<Integer, BonusCard> bonusCards = new HashMap<>();
 
+    @PostConstruct
     public void init() {
         bonusCards.put(curId, new BonusCard(curId++, 10.0));
     }
