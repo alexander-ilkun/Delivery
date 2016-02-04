@@ -5,10 +5,15 @@ import com.ilkun.delivery.domain.Customer;
 import com.ilkun.delivery.domain.DiscountManager;
 import com.ilkun.delivery.domain.Order;
 import com.ilkun.delivery.domain.Pizza;
+import com.ilkun.delivery.event.MessageEvent;
+import com.ilkun.delivery.infrastructure.annotations.Benchmark;
 import com.ilkun.delivery.repository.OrderRepository;
 import java.util.HashMap;
 import java.util.Map;
+import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Service;
 
 /**
@@ -16,11 +21,12 @@ import org.springframework.stereotype.Service;
  * @author alexander-ilkun
  */
 @Service
-public class SimpleOrderService implements OrderService {
+public class SimpleOrderService implements OrderService, ApplicationContextAware {
 
     private final OrderRepository orderRepository;
     private final PizzaService pizzaService;
     private final DiscountManager discountManager;
+    private ApplicationContext appContext;
     
     @Autowired
     public SimpleOrderService(OrderRepository orderRepository,
@@ -30,6 +36,7 @@ public class SimpleOrderService implements OrderService {
         this.discountManager = discountManager;
     }
 
+    @Benchmark
     @Override
     public Order placeNewOrder(Customer customer, Integer[] pizzasID,
             Integer[] pizzasNumber) {
@@ -40,14 +47,21 @@ public class SimpleOrderService implements OrderService {
         }
         Order newOrder = new Order(customer, address, pizzas, discountManager);
         saveOrder(newOrder);  // set Order Id and save Order to in-memory list
+        appContext.publishEvent(new MessageEvent(this, "event from PlaceNewOrder"));
         return newOrder;
     }
 
+    @Benchmark
     private Pizza getPizzaByID(Integer id) {
         return pizzaService.find(id);
     }
 
     private void saveOrder(Order newOrder) {
         orderRepository.save(newOrder);
+    }
+
+    @Override
+    public void setApplicationContext(ApplicationContext appContext) throws BeansException {
+        this.appContext = appContext;
     }
 }

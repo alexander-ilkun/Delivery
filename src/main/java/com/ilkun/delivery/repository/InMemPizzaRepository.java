@@ -19,13 +19,14 @@ public class InMemPizzaRepository implements PizzaRepository {
 
     @PostConstruct
     public void init() {
+        System.out.println("init() inMemPizzaRepository");
         pizzas.put(curId, new Pizza(curId++, "SEA", 4.0, Pizza.PizzaType.SEA));
         pizzas.put(curId, new Pizza(curId++, "MEAT", 4.0, Pizza.PizzaType.MEAT));
         pizzas.put(curId, new Pizza(curId++, "VEGETARIAN", 4.0, Pizza.PizzaType.VEGETARIAN));        
     }
     
-    @Benchmark
     @Override
+    @Benchmark
     public Pizza find(Integer id) {
         return pizzas.get(id);
     }

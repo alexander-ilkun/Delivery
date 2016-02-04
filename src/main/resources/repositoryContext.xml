@@ -7,11 +7,15 @@
           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
 ">
 
+    <context:component-scan base-package="com.ilkun.delivery.repository" />
+
     <bean class="com.ilkun.delivery.infrastructure.BenchmarkBeanPostProcessor" />
-    <context:component-scan base-package="com.ilkun.delivery.service" />
-    <context:component-scan base-package="com.ilkun.delivery.domain">
-        <context:include-filter type="annotation" expression="com.ilkun.delivery.infrastructure.annotations.MyComponent" />
-    </context:component-scan>
-    <context:component-scan base-package="com.ilkun.delivery.event" />
+    
+    <bean name="pizzaFactoryBean" class="com.ilkun.delivery.infrastructure.PizzaFactoryBean">
+        <property name="id" value="1" />
+        <property name="name" value="Sea" />
+        <property name="price" value="4.0" />
+        <property name="type" value="SEA" />
+    </bean>
 
 </beans>

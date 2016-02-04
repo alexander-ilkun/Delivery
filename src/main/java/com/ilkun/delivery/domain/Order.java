@@ -1,11 +1,13 @@
 package com.ilkun.delivery.domain;
 
+import com.ilkun.delivery.infrastructure.annotations.MyComponent;
 import java.util.Map;
 
 /**
  *
  * @author alexander-ilkun
  */
+@MyComponent
 public class Order {
 
     public enum OrderType { NEW, IN_PROGRESS, CANCELLED, DONE }
@@ -20,6 +22,8 @@ public class Order {
     private double discount;
     private int numberOfPizzas;
     private OrderType type;
+    
+    public Order() {}
     
     public Order(Integer id, Customer customer,
             Address address, Map<Pizza, Integer> pizzas,
