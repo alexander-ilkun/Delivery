@@ -9,10 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-/**
- *
- * @author alexander-ilkun
- */
 @Entity
 @Table(name = "roles")
 public class Role implements Serializable {
@@ -20,7 +16,9 @@ public class Role implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
     private String name;
+    
     @ManyToMany(mappedBy = "roles")
     private List<User> users;
 
@@ -47,5 +45,4 @@ public class Role implements Serializable {
     public void setUsers(List<User> users) {
         this.users = users;
     }
-
 }

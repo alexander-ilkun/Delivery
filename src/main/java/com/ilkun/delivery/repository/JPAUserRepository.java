@@ -1,19 +1,12 @@
 package com.ilkun.delivery.repository;
 
-import com.ilkun.delivery.domain.Pizza;
 import com.ilkun.delivery.domain.User;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
-/**
- *
- * @author alexander-ilkun
- */
 @Repository
 public class JPAUserRepository implements UserRepository {
 

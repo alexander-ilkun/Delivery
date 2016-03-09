@@ -1,7 +1,8 @@
-package com.ilkun.delivery.service;
+package com.ilkun.delivery.security;
 
 import com.ilkun.delivery.domain.Role;
 import com.ilkun.delivery.domain.User;
+import com.ilkun.delivery.service.UserService;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +16,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
-/**
- *
- * @author alexander-ilkun
- */
 @Component("JPAAuthProvider")
 public class JPAAuthenticationProvider implements AuthenticationProvider {
 

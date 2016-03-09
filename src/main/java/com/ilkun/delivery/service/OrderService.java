@@ -1,17 +1,23 @@
 package com.ilkun.delivery.service;
 
+import com.ilkun.delivery.domain.Address;
 import com.ilkun.delivery.domain.User;
 import com.ilkun.delivery.domain.Order;
+import java.util.List;
 
-/**
- *
- * @author alexander-ilkun
- */
 public interface OrderService {
 
-    Order placeNewOrder(User customer, Long[] pizzasID, Integer[] pizzasNumber);
-
+    Order create();
+    
     Order addPizza(Order order, Long pizzaId, int quantity);
 
-    Order removePizza(Order bucket, Long pizzaId);
+    Order removePizza(Order order, Long pizzaId);
+
+    Order checkout(Order order, User user);
+
+    Order place(Order order, Address address);
+
+    Order save(Order order);
+
+    List<Order> findOrdersByUser(User user);
 }

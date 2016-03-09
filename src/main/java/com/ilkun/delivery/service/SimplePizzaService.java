@@ -7,20 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-/**
- *
- * @author alexander-ilkun
- */
 @Service
 public class SimplePizzaService implements PizzaService {
 
-    private final PizzaRepository pizzaRepository;
-
     @Autowired
-    public SimplePizzaService(PizzaRepository pizzaRepository) {
-        this.pizzaRepository = pizzaRepository;
-    }
-    
+    private PizzaRepository pizzaRepository;
+
     @Override
     public Pizza find(Long id) {
         return pizzaRepository.find(id);

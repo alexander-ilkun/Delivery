@@ -33,22 +33,16 @@
         <put-attribute name="current" value="personalinfo" cascade="true" />
     </definition>
     
-    <definition name="hello" extends="common">
-        <put-attribute name="title" value="Hello" />
-        <put-attribute name="body" value="/WEB-INF/jsp/hello.jsp" />
-        <put-attribute name="current" value="hello" />
+    <definition name="checkout" extends="common">
+        <put-attribute name="title" value="Checkout" />
+        <put-attribute name="body" value="/WEB-INF/jsp/checkout.jsp" />
+        <put-attribute name="current" value="checkout" cascade="true" />
     </definition>
     
-    <definition name="pizzas" extends="common">
-        <put-attribute name="title" value="Pizzas" />
-        <put-attribute name="body" value="/WEB-INF/jsp/pizzas.jsp" />
-        <put-attribute name="current" value="pizzas" />
+    <definition name="orders" extends="common">
+        <put-attribute name="title" value="Orders" />
+        <put-attribute name="body" value="/WEB-INF/jsp/orders.jsp" />
+        <put-attribute name="current" value="orders" cascade="true" />
     </definition>
     
-    <!--    <definition name="home" extends="common">
-        <put-attribute name="title" value="Home" />
-        <put-attribute name="body" value="/WEB-INF/jsp/home.jsp" />
-        <put-attribute name="current" value="home" />
-    </definition>-->
-
 </tiles-definitions>

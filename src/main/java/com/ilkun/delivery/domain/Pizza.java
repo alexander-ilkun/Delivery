@@ -9,10 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-/**
- *
- * @author alexander-ilkun
- */
 @Entity
 @Table(name = "pizzas")
 public class Pizza implements Serializable{
@@ -22,8 +18,11 @@ public class Pizza implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
     private String name;
+    
     private double price;
+    
     @Enumerated(EnumType.STRING)
     private PizzaType type;
 

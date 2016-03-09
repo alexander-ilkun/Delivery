@@ -22,6 +22,7 @@
                 <li class="${current == 'home' ? 'active' : ''}"><a href="<spring:url value="/" />">Home</a></li>
                 <security:authorize access="isAuthenticated()">
                     <li class="${current == 'personalinfo' ? 'active' : ''}"><a href="<spring:url value="/app/personalinfo.html" />">Personal info</a></li>
+                    <li class="${current == 'orders' ? 'active' : ''}"><a href="<spring:url value="/app/orders.html" />">Orders</a></li>
                 </security:authorize>
             </ul>
             <ul class="nav navbar-nav navbar-right">

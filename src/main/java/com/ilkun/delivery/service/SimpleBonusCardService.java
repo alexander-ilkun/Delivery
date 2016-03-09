@@ -8,28 +8,16 @@ import org.springframework.stereotype.Service;
 @Service
 public class SimpleBonusCardService implements BonusCardService {
 
-    private final BonusCardRepository bonusCardRepository;
-
     @Autowired
-    public SimpleBonusCardService(BonusCardRepository bonusCardRepository) {
-        this.bonusCardRepository = bonusCardRepository;
-    }
-    
+    private BonusCardRepository bonusCardRepository;
+
     @Override
     public BonusCard find(Long id) {
         return bonusCardRepository.find(id);
     }
 
     @Override
-    public BonusCard withdraw(BonusCard bonusCard, double withdrawAmount) {
-        bonusCard.withdraw(withdrawAmount);
+    public BonusCard save(BonusCard bonusCard) {
         return bonusCardRepository.save(bonusCard);
     }
-
-    @Override
-    public BonusCard deposit(BonusCard bonusCard, double depositAmount) {
-        bonusCard.deposit(depositAmount);
-        return bonusCardRepository.save(bonusCard);
-    }
-    
 }

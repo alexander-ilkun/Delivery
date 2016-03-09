@@ -7,10 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-/**
- *
- * @author alexander-ilkun
- */
 @Entity
 @Table(name = "addresses")
 public class Address implements Serializable {
@@ -18,10 +14,15 @@ public class Address implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
     private String postcode;
+    
     private String city;
+    
     private String district;
+    
     private String street;
+    
     private String apartments;
 
     public Address() {

@@ -13,7 +13,8 @@
     <tx:annotation-driven transaction-manager="transactionManager" /> 
     
     <context:component-scan base-package="com.ilkun.delivery.service" />
-
-    <bean class="com.ilkun.delivery.domain.SimpleDiscountManager" />
+    <context:component-scan base-package="com.ilkun.delivery.security" />
+    
+    <bean class="com.ilkun.delivery.domain.discount.SimpleDiscountManager" />
 
 </beans>

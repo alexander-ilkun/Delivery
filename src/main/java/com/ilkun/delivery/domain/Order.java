@@ -1,13 +1,16 @@
 package com.ilkun.delivery.domain;
 
+import com.ilkun.delivery.domain.discount.DiscountManager;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,32 +19,25 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-/**
- *
- * @author alexander-ilkun
- */
 @Entity
 @Table(name = "orders")
 public class Order implements Serializable {
 
     public enum OrderType { NEW, IN_PROGRESS, CANCELLED, DONE }
 
-    private static transient final int MAX_NUMBER_OF_PIZZAS = 10;
-    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User customer;
+    private User user;
     @ManyToOne
     @JoinColumn(name = "address_id")
     private Address address;
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<OrderDetails> orderDetails;
     private double price;
     private double discount;
-    private int numberOfPizzas;
     @Enumerated(EnumType.STRING)
     private OrderType type;
     
@@ -53,12 +49,12 @@ public class Order implements Serializable {
     public Order(Long id, User customer,
             Address address, Map<Pizza, Integer> pizzas,
             DiscountManager discountManager) {
-        this(customer, address, pizzas, discountManager);
+        this(customer, address, pizzas);
         this.id = id;
     }
 
     public Order(User customer, Address address,
-            Map<Pizza, Integer> pizzas, DiscountManager discountManager) {
+            Map<Pizza, Integer> pizzas) {
     }
 
     public void addPizza(Pizza pizza, int quantity) {
@@ -80,7 +76,14 @@ public class Order implements Serializable {
                 return;
             }
         }
-        orderDetails.remove(pizza);
+    }
+
+    public void checkout(DiscountManager discountManager) {
+        price = 0.0;
+        for (OrderDetails ordDet : orderDetails) {
+            price += ordDet.getQuantity() * ordDet.getPizzaPrice();
+        }
+        discount = discountManager.getDiscount(this);
     }
 
     public void changeType(OrderType newType) {
@@ -95,7 +98,7 @@ public class Order implements Serializable {
 
     @Override
     public String toString() {
-        return super.toString() + "Order{" + "id=" + id + ", customer=" + customer
+        return super.toString() + "Order{" + "id=" + id + ", user=" + user
                 + ", address=" + address + ", total=" + getTotalPrice() + 
                 ", type=" + type + '}';
     }
@@ -108,12 +111,20 @@ public class Order implements Serializable {
         this.id = id;
     }
 
-    public User getCustomer() {
-        return customer;
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Address getAddress() {
         return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     public List<OrderDetails> getOrderDetails() {
@@ -128,8 +139,16 @@ public class Order implements Serializable {
         return price;
     }
 
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
     public double getDiscount() {
         return discount;
+    }
+
+    public void setDiscount(double discount) {
+        this.discount = discount;
     }
 
     public double getTotalPrice() {
@@ -137,6 +156,10 @@ public class Order implements Serializable {
     }
 
     public int getNumberOfPizzas() {
+        int numberOfPizzas = 0;
+        for (OrderDetails ordDet : orderDetails) {
+            numberOfPizzas += ordDet.getQuantity();
+        }
         return numberOfPizzas;
     }
 
@@ -144,7 +167,7 @@ public class Order implements Serializable {
         return type;
     }
 
-    public void setType(OrderType type) {
+    private void setType(OrderType type) {
         this.type = type;
     }
 }

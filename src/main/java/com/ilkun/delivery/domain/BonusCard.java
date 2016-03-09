@@ -7,10 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-/**
- *
- * @author alexander-ilkun
- */
 @Entity
 @Table(name = "bonus_cards")
 public class BonusCard implements Serializable {
@@ -18,6 +14,7 @@ public class BonusCard implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
     private double amount;
 
     public BonusCard() {

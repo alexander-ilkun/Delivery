@@ -15,19 +15,14 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class SimpleUserService implements UserService {
 
-    private final UserRepository userRepository;
-    private final AddressService addressService;
-    private final BonusCardService bonusCardService;
-    private final RoleService roleService;
-    
     @Autowired
-    public SimpleUserService(UserRepository customerRepository,
-            AddressService addressService, BonusCardService bonusCardService, RoleService roleService) {
-        this.userRepository = customerRepository;
-        this.addressService = addressService;
-        this.bonusCardService = bonusCardService;
-        this.roleService = roleService;
-    }
+    private UserRepository userRepository;
+    @Autowired
+    private AddressService addressService;
+    @Autowired
+    private BonusCardService bonusCardService;
+    @Autowired
+    private RoleService roleService;
     
     @Override
     public User find(Long id) {

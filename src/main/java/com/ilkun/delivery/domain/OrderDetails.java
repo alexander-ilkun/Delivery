@@ -20,15 +20,23 @@ public class OrderDetails implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
     @ManyToOne
     @JoinColumn(name = "order_id")
     private Order order;
+    
     @ManyToOne
     @JoinColumn(name = "pizza_id")
     private Pizza pizza;
+    
     private int quantity;
+    
     private double pizzaPrice;
 
+    public OrderDetails() {
+        
+    }
+    
     public OrderDetails(Order order, Pizza pizza, int quantity, double pizzaPrice) {
         this.order = order;
         this.pizza = pizza;
@@ -75,5 +83,4 @@ public class OrderDetails implements Serializable {
     public void setPizzaPrice(double pizzaPrice) {
         this.pizzaPrice = pizzaPrice;
     }
-    
 }

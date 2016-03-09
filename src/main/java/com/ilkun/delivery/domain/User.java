@@ -3,6 +3,7 @@ package com.ilkun.delivery.domain;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -15,10 +16,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-/**
- *
- * @author alexander-ilkun
- */
 @Entity
 @Table(name = "user_details")
 public class User implements Serializable {
@@ -26,15 +23,20 @@ public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
     @Column(unique = true)
     private String name;
+    
     private String password;
+    
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable
     private List<Address> addresses;
-    @OneToOne
+    
+    @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinColumn(name = "bonus_card_id")
     private BonusCard bonusCard;
+    
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable
     private List<Role> roles;

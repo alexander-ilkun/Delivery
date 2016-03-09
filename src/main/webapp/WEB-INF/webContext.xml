@@ -12,22 +12,8 @@
 
     <mvc:annotation-driven />
     
-<!--    <bean id="conversionService"
-          class="org.springframework.context.support.ConversionServiceFactoryBean">
-          <property name="converters">
-              <set>
-                  <bean class="com.ilkun.delivery.web.PizzaConverter" />
-              </set>
-          </property>
-    </bean>-->
-    
     <context:component-scan base-package="com.ilkun.delivery.web" />
     
-    <!--    <bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping" />-->
-    
-<!--    <bean name="/hello" class="com.ilkun.delivery.web.HelloController" />-->
-    
-<!--       JstlView-->
     <bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
         <property name="definitions">
             <list>
@@ -44,52 +30,4 @@
     
     <mvc:resources mapping="/resources/**" location="/resources/" />
     
-    <!--    <context:component-scan base-package="com.ilkun.delivery.repository" />
-    
-    <context:property-placeholder location="classpath:/jdbc.properties" />
-    
-        <bean id="propertyConfigurer"
-        class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
-        <property name="location" value="classpath:/jdbc.properties" />
-    </bean>
-    
-    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
-        <property name="driverClassName" value="${driver}" />
-        <property name="url" value="${url}" />
-        <property name="username" value="${user}" />
-        <property name="password" value="${password}" />
-        <property name="initialSize" value="5" />
-    </bean>
-        
-    <bean id="entityManagerFactory"
-          class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-        <property name="dataSource" ref="dataSource" />
-        <property name="jpaVendorAdapter">
-            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
-        </property>
-        <property name="packagesToScan" value="com.ilkun.delivery.domain" />
-        <property name="jpaProperties">
-            <props>
-                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
-                <prop key="hibernate.hbm2ddl.auto">update</prop>
-                <prop key="hibernate.show_sql">true</prop>
-                <prop key="hibernate.format_sql">true</prop>
-            </props>
-        </property>
-    </bean>
-    
-    <bean id="transactionManager"
-          class="org.springframework.orm.jpa.JpaTransactionManager">
-        <property name="entityManagerFactory" ref="entityManagerFactory" />
-    </bean>
-    
-    <tx:annotation-driven transaction-manager="transactionManager" /> 
-    
-    <bean class="com.ilkun.delivery.infrastructure.BenchmarkBeanPostProcessor" />
-    <context:component-scan base-package="com.ilkun.delivery.service" />
-    <context:component-scan base-package="com.ilkun.delivery.domain">
-        <context:include-filter type="annotation" expression="com.ilkun.delivery.infrastructure.annotations.MyComponent" />
-    </context:component-scan>
-    <context:component-scan base-package="com.ilkun.delivery.event" />-->
-
 </beans>

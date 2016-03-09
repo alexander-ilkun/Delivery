@@ -4,6 +4,9 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 
 <div class="well well-sm pre-scrollable col-sm-4" id="left" style="overflow-y: scroll; min-height: 80%;">
+    <c:if test="${not empty bucket.orderDetails}">
+        <a href="<spring:url value="/app/order/checkout/" />" class="btn btn-primary btn-block" style="margin-bottom: 16px;"value="">Checkout</a>
+    </c:if>
     <c:forEach items="${bucket.orderDetails}" var="ordDet">
         <div class="col-sm-6 col-md-6">
             <div class="thumbnail">
@@ -11,8 +14,8 @@
                 <div class="caption">
                     <center>
                         <h4>${ordDet.pizza.name}</h4>
-                    <p>Quantity: ${ordDet.quantity}</p>
-                    <p>Price: ${ordDet.pizza.price * ordDet.quantity}$</p>
+                        <p>Quantity: ${ordDet.quantity}</p>
+                        <p>Price: ${ordDet.pizza.price * ordDet.quantity}$</p>
                     </center>
                     <p>
                     <form id="" action="<spring:url value="/app/order/add/" />" method="POST">
@@ -31,7 +34,7 @@
             </div>
         </div>
     </c:forEach>
-</div>   
+</div>
 
 <div class="well well-sm pre-scrollable col-sm-8" id="right" style="overflow-y: scroll; min-height: 80%;">
     <c:forEach items="${pizzas}" var="pizza">
@@ -40,9 +43,9 @@
                 <img src="<spring:url value="/resources/img/pizza.png" />" alt="pizza">
                 <div class="caption">
                     <center>
-                    <h3>${pizza.name}</h3>
-                    <p>Type: ${pizza.type}</p>
-                    <p>Price: ${pizza.price}$</p>
+                        <h3>${pizza.name}</h3>
+                        <p>Type: ${pizza.type}</p>
+                        <p>Price: ${pizza.price}$</p>
                     </center>
                     <p>
                     <form id="" action="<spring:url value="/app/order/add/" />" method="POST">

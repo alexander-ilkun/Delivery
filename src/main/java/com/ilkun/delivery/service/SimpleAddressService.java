@@ -8,13 +8,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class SimpleAddressService implements AddressService {
 
-    private final AddressRepository addressRepository;
-
     @Autowired
-    public SimpleAddressService(AddressRepository addressRepository) {
-        this.addressRepository = addressRepository;
-    }
-    
+    private AddressRepository addressRepository;
+
     @Override
     public Address find(Long id) {
         return addressRepository.find(id);
