@@ -8,5 +8,7 @@ import com.ilkun.delivery.domain.Address;
  */
 public interface AddressService {
     
-    Address find(Integer id);
+    Address find(Long id);
+
+    Address save(Address address);
 }

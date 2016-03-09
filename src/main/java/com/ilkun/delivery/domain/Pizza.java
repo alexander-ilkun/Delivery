@@ -1,19 +1,35 @@
 package com.ilkun.delivery.domain;
 
+import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  *
  * @author alexander-ilkun
  */
-public class Pizza {
+@Entity
+@Table(name = "pizzas")
+public class Pizza implements Serializable{
 
     public enum PizzaType { VEGETARIAN, SEA, MEAT }
 
-    private Integer id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String name;
     private double price;
+    @Enumerated(EnumType.STRING)
     private PizzaType type;
 
-    public Pizza(Integer id, String name, double price, PizzaType type) {
+    public Pizza() {}
+    
+    public Pizza(Long id, String name, double price, PizzaType type) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -27,15 +43,34 @@ public class Pizza {
     }
 
     @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 89 * name.hashCode();
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Pizza other = (Pizza) obj;
+        if (name.equals(other.name)) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
     public String toString() {
         return "Pizza{" + "id=" + id + ", name=" + name + ", price=" + price + ", type=" + type + '}';
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

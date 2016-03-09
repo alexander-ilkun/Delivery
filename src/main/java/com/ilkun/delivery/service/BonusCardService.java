@@ -8,7 +8,7 @@ import com.ilkun.delivery.domain.BonusCard;
  */
 public interface BonusCardService {
     
-    BonusCard find(Integer id);
+    BonusCard find(Long id);
 
     BonusCard withdraw(BonusCard bonusCard, double withdrawAmount);
 

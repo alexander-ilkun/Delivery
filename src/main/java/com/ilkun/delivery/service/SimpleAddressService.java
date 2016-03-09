@@ -16,7 +16,12 @@ public class SimpleAddressService implements AddressService {
     }
     
     @Override
-    public Address find(Integer id) {
+    public Address find(Long id) {
         return addressRepository.find(id);
+    }
+
+    @Override
+    public Address save(Address address) {
+        return addressRepository.save(address);
     }
 }

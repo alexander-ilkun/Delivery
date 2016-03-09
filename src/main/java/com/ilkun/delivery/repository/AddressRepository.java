@@ -1,6 +1,7 @@
 package com.ilkun.delivery.repository;
 
 import com.ilkun.delivery.domain.Address;
+import java.util.List;
 
 /**
  *
@@ -8,5 +9,9 @@ import com.ilkun.delivery.domain.Address;
  */
 public interface AddressRepository {
     
-    Address find(Integer id);
+    Address find(Long id);
+
+    List<Address> findAll();
+
+    Address save(Address address);
 }

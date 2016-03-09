@@ -1,7 +1,7 @@
 package com.ilkun.delivery.service;
 
 import com.ilkun.delivery.domain.Address;
-import com.ilkun.delivery.domain.Customer;
+import com.ilkun.delivery.domain.User;
 import com.ilkun.delivery.domain.DiscountManager;
 import com.ilkun.delivery.domain.Order;
 import com.ilkun.delivery.domain.Pizza;
@@ -38,7 +38,7 @@ public class SimpleOrderService implements OrderService, ApplicationContextAware
 
     @Benchmark
     @Override
-    public Order placeNewOrder(Customer customer, Integer[] pizzasID,
+    public Order placeNewOrder(User customer, Long[] pizzasID,
             Integer[] pizzasNumber) {
         Map<Pizza, Integer> pizzas = new HashMap<>();
         Address address = customer.getAddresses().get(0); // TODO : choose correct address
@@ -51,8 +51,20 @@ public class SimpleOrderService implements OrderService, ApplicationContextAware
         return newOrder;
     }
 
+    @Override
+    public Order addPizza(Order order, Long pizzaId, int quantity) {
+        order.addPizza(pizzaService.find(pizzaId), quantity);
+        return order;
+    }
+    
+    @Override
+    public Order removePizza(Order order, Long pizzaId) {
+        order.removePizza(pizzaService.find(pizzaId));
+        return order;
+    }
+    
     @Benchmark
-    private Pizza getPizzaByID(Integer id) {
+    private Pizza getPizzaByID(Long id) {
         return pizzaService.find(id);
     }
 

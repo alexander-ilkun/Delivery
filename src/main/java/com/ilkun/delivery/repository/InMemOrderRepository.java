@@ -1,6 +1,8 @@
 package com.ilkun.delivery.repository;
 
 import com.ilkun.delivery.domain.Order;
+import com.ilkun.delivery.repository.OrderRepository;
+import com.ilkun.delivery.repository.OrderRepository;
 import java.util.HashMap;
 import java.util.Map;
 import org.springframework.stereotype.Repository;
@@ -12,11 +14,11 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class InMemOrderRepository implements OrderRepository {
 
-    private static int curId = 1;
-    private static final Map<Integer, Order> orders = new HashMap<>();
+    private static Long curId = 1l;
+    private static final Map<Long, Order> orders = new HashMap<>();
 
     @Override
-    public Order find(Integer id) {
+    public Order find(Long id) {
         return orders.get(id);
     }
     

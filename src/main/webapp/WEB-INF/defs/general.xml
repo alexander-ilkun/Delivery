@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+    
+    <definition name="common" template="/WEB-INF/layout/classic.jsp">
+        <put-attribute name="navbar" value="/WEB-INF/layout/navbar.jsp" />
+        <put-attribute name="footer" value="/WEB-INF/layout/footer.jsp" />
+    </definition>
+    
+    <definition name="home" extends="common">
+        <put-attribute name="title" value="Delivery" />
+        <put-attribute name="body" value="/WEB-INF/jsp/home.jsp" />
+        <put-attribute name="current" value="home" cascade="true" />
+    </definition>
+    
+    <definition name="login" extends="common">
+        <put-attribute name="title" value="Login" />
+        <put-attribute name="body" value="/WEB-INF/jsp/login.jsp" />
+        <put-attribute name="current" value="login" cascade="true" />
+    </definition>
+
+    <definition name="register" extends="common">
+        <put-attribute name="title" value="Register" />
+        <put-attribute name="body" value="/WEB-INF/jsp/register.jsp" />
+        <put-attribute name="current" value="register" cascade="true" />
+    </definition>
+    
+    <definition name="personalinfo" extends="common">
+        <put-attribute name="title" value="Personal info" />
+        <put-attribute name="body" value="/WEB-INF/jsp/personalinfo.jsp" />
+        <put-attribute name="current" value="personalinfo" cascade="true" />
+    </definition>
+    
+    <definition name="hello" extends="common">
+        <put-attribute name="title" value="Hello" />
+        <put-attribute name="body" value="/WEB-INF/jsp/hello.jsp" />
+        <put-attribute name="current" value="hello" />
+    </definition>
+    
+    <definition name="pizzas" extends="common">
+        <put-attribute name="title" value="Pizzas" />
+        <put-attribute name="body" value="/WEB-INF/jsp/pizzas.jsp" />
+        <put-attribute name="current" value="pizzas" />
+    </definition>
+    
+    <!--    <definition name="home" extends="common">
+        <put-attribute name="title" value="Home" />
+        <put-attribute name="body" value="/WEB-INF/jsp/home.jsp" />
+        <put-attribute name="current" value="home" />
+    </definition>-->
+
+</tiles-definitions>

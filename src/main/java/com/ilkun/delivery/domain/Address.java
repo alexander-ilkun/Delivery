@@ -1,18 +1,33 @@
 package com.ilkun.delivery.domain;
 
+import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  *
  * @author alexander-ilkun
  */
-public class Address {
-    private Integer id;
+@Entity
+@Table(name = "addresses")
+public class Address implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String postcode;
     private String city;
     private String district;
     private String street;
     private String apartments;
 
-    public Address(Integer id, String postcode, String city, String district,
+    public Address() {
+    }
+
+    public Address(Long id, String postcode, String city, String district,
             String street, String apartments) {
         this.id = id;
         this.postcode = postcode;
@@ -36,11 +51,11 @@ public class Address {
         return "Address{" + "id=" + id + ", postcode=" + postcode + ", city=" + city + ", district=" + district + ", street=" + street + ", apartments=" + apartments + '}';
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -8,7 +8,7 @@ import com.ilkun.delivery.domain.BonusCard;
  */
 public interface BonusCardRepository {
     
-    BonusCard find(Integer id);
+    BonusCard find(Long id);
 
     BonusCard save(BonusCard bonusCard);
 }

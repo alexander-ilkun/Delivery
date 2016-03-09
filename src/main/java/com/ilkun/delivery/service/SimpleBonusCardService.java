@@ -16,7 +16,7 @@ public class SimpleBonusCardService implements BonusCardService {
     }
     
     @Override
-    public BonusCard find(Integer id) {
+    public BonusCard find(Long id) {
         return bonusCardRepository.find(id);
     }
 

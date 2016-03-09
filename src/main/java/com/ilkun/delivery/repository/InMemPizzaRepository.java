@@ -2,7 +2,10 @@ package com.ilkun.delivery.repository;
 
 import com.ilkun.delivery.domain.Pizza;
 import com.ilkun.delivery.infrastructure.annotations.Benchmark;
+import com.ilkun.delivery.repository.PizzaRepository;
+import com.ilkun.delivery.repository.PizzaRepository;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.annotation.PostConstruct;
 import org.springframework.stereotype.Repository;
@@ -11,11 +14,10 @@ import org.springframework.stereotype.Repository;
  *
  * @author alexander-ilkun
  */
-@Repository
 public class InMemPizzaRepository implements PizzaRepository {
 
-    private static int curId = 1;
-    private Map<Integer, Pizza> pizzas = new HashMap<>();
+    private static long curId = 1;
+    private Map<Long, Pizza> pizzas = new HashMap<>();
 
     @PostConstruct
     public void init() {
@@ -27,15 +29,25 @@ public class InMemPizzaRepository implements PizzaRepository {
     
     @Override
     @Benchmark
-    public Pizza find(Integer id) {
+    public Pizza find(Long id) {
         return pizzas.get(id);
     }
 
-    public Map<Integer, Pizza> getPizzas() {
+    public Map<Long, Pizza> getPizzas() {
         return pizzas;
     }
 
-    public void setPizzas(Map<Integer, Pizza> pizzas) {
+    public void setPizzas(Map<Long, Pizza> pizzas) {
         this.pizzas = pizzas;
+    }
+
+    @Override
+    public Pizza save(Pizza pizza) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Pizza> findAll() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

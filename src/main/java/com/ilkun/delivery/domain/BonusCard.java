@@ -1,15 +1,29 @@
 package com.ilkun.delivery.domain;
 
+import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  *
  * @author alexander-ilkun
  */
-public class BonusCard {
-    
-    Integer id;
-    double amount;
+@Entity
+@Table(name = "bonus_cards")
+public class BonusCard implements Serializable {
 
-    public BonusCard(Integer id, double amount) {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private double amount;
+
+    public BonusCard() {
+    }
+
+    public BonusCard(Long id, double amount) {
         this.id = id;
         this.amount = amount;
     }
@@ -18,11 +32,11 @@ public class BonusCard {
         this.amount = amount;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -15,8 +15,8 @@ public class SimpleDiscountManager implements DiscountManager {
 
     @Override
     public double getDiscount(Order order) {
-        Customer customer = order.getCustomer();
-        Map<Pizza, Integer> pizzas = order.getPizzas();
+        User customer = order.getCustomer();
+        Map<Pizza, Integer> pizzas = null;
         BonusCard bonusCard = customer.getBonusCard();
         int numberOfPizzas = order.getNumberOfPizzas();
         double curDiscount = 0.0;

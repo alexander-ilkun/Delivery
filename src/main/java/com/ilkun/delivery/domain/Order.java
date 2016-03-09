@@ -1,52 +1,86 @@
 package com.ilkun.delivery.domain;
 
-import com.ilkun.delivery.infrastructure.annotations.MyComponent;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  *
  * @author alexander-ilkun
  */
-@MyComponent
-public class Order {
+@Entity
+@Table(name = "orders")
+public class Order implements Serializable {
 
     public enum OrderType { NEW, IN_PROGRESS, CANCELLED, DONE }
 
-    private static final int MAX_NUMBER_OF_PIZZAS = 10;
+    private static transient final int MAX_NUMBER_OF_PIZZAS = 10;
     
-    private Integer id;
-    private Customer customer;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User customer;
+    @ManyToOne
+    @JoinColumn(name = "address_id")
     private Address address;
-    private Map<Pizza, Integer> pizzas;
+    @OneToMany(mappedBy = "order")
+    private List<OrderDetails> orderDetails;
     private double price;
     private double discount;
     private int numberOfPizzas;
+    @Enumerated(EnumType.STRING)
     private OrderType type;
     
-    public Order() {}
+    public Order() {
+        this.type = OrderType.NEW;
+        this.orderDetails = new ArrayList<>();
+    }
     
-    public Order(Integer id, Customer customer,
+    public Order(Long id, User customer,
             Address address, Map<Pizza, Integer> pizzas,
             DiscountManager discountManager) {
         this(customer, address, pizzas, discountManager);
         this.id = id;
     }
 
-    public Order(Customer customer, Address address,
+    public Order(User customer, Address address,
             Map<Pizza, Integer> pizzas, DiscountManager discountManager) {
-        for (Map.Entry<Pizza, Integer> entry : pizzas.entrySet()) {
-            numberOfPizzas += entry.getValue();
-            price += entry.getKey().getPrice() * entry.getValue();
-            if (numberOfPizzas > MAX_NUMBER_OF_PIZZAS) {
-                throw new IllegalArgumentException("Number of pizzas can not "
-                        + "be more than " + MAX_NUMBER_OF_PIZZAS);
+    }
+
+    public void addPizza(Pizza pizza, int quantity) {
+        for (OrderDetails ordDet : orderDetails) {
+            if (ordDet.getPizza().equals(pizza)) {
+                ordDet.setQuantity(ordDet.getQuantity() + quantity);
+                return;
             }
         }
-        this.customer = customer;
-        this.address = address;
-        this.pizzas = pizzas;
-        this.type = OrderType.NEW;
-        this.discount = discountManager.getDiscount(this);
+        OrderDetails newDetails = new OrderDetails(this, pizza, quantity, pizza.getPrice());
+        orderDetails.add(newDetails);
+    }
+
+    public void removePizza(Pizza pizza) {
+        Iterator<OrderDetails> it = orderDetails.iterator();
+        while(it.hasNext()) {
+            if (it.next().getPizza().equals(pizza)) {
+                it.remove();
+                return;
+            }
+        }
+        orderDetails.remove(pizza);
     }
 
     public void changeType(OrderType newType) {
@@ -61,20 +95,20 @@ public class Order {
 
     @Override
     public String toString() {
-        return "Order{" + "id=" + id + ", customer=" + customer
-                + ", address=" + address + ", pizzas=" + pizzas
-                + ", total=" + getTotalPrice() + ", type=" + type + '}';
+        return super.toString() + "Order{" + "id=" + id + ", customer=" + customer
+                + ", address=" + address + ", total=" + getTotalPrice() + 
+                ", type=" + type + '}';
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public Customer getCustomer() {
+    public User getCustomer() {
         return customer;
     }
 
@@ -82,8 +116,12 @@ public class Order {
         return address;
     }
 
-    public Map<Pizza, Integer> getPizzas() {
-        return pizzas;
+    public List<OrderDetails> getOrderDetails() {
+        return orderDetails;
+    }
+
+    public void setOrderDetails(List<OrderDetails> orderDetails) {
+        this.orderDetails = orderDetails;
     }
 
     public double getPrice() {

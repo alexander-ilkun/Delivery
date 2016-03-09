@@ -1,16 +1,18 @@
 package com.ilkun.delivery.repository;
 
 import com.ilkun.delivery.domain.Address;
+import com.ilkun.delivery.repository.AddressRepository;
+import com.ilkun.delivery.repository.AddressRepository;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.annotation.PostConstruct;
 import org.springframework.stereotype.Repository;
 
-@Repository
 public class InMemAddressRepository implements AddressRepository {
 
-    private static int curId = 1;
-    private static final Map<Integer, Address> addresses = new HashMap<>();
+    private static long curId = 1;
+    private static final Map<Long, Address> addresses = new HashMap<>();
 
     @PostConstruct
     public void init() {
@@ -23,8 +25,18 @@ public class InMemAddressRepository implements AddressRepository {
     }
     
     @Override
-    public Address find(Integer id) {
+    public Address find(Long id) {
         return addresses.get(id);
+    }
+
+    @Override
+    public List<Address> findAll() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Address save(Address address) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

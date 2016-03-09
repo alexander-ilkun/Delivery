@@ -1,6 +1,7 @@
 package com.ilkun.delivery.repository;
 
 import com.ilkun.delivery.domain.Pizza;
+import java.util.List;
 
 /**
  *
@@ -8,5 +9,9 @@ import com.ilkun.delivery.domain.Pizza;
  */
 public interface PizzaRepository {
 
-    Pizza find(Integer id);
+    Pizza find(Long id);
+
+    List<Pizza> findAll();
+    
+    Pizza save(Pizza pizza);
 }
