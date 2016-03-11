@@ -10,7 +10,7 @@
     <c:forEach items="${bucket.orderDetails}" var="ordDet">
         <div class="col-sm-6 col-md-6">
             <div class="thumbnail">
-                <img src="<spring:url value="/resources/img/pizza.png" />" alt="pizza">
+                <img src="<spring:url value="/resources/img/pizza${ordDet.pizza.id % 4 + 1}.png" />" alt="pizza">
                 <div class="caption">
                     <center>
                         <h4>${ordDet.pizza.name}</h4>
@@ -40,7 +40,7 @@
     <c:forEach items="${pizzas}" var="pizza">
         <div class="col-sm-4 col-md-4">
             <div class="thumbnail">
-                <img src="<spring:url value="/resources/img/pizza.png" />" alt="pizza">
+                <img src="<spring:url value="/resources/img/pizza${pizza.id % 4 + 1}.png" />" alt="pizza">
                 <div class="caption">
                     <center>
                         <h3>${pizza.name}</h3>

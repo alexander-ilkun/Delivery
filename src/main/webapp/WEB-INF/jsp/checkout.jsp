@@ -24,7 +24,8 @@
 <p>Total price: ${bucket.totalPrice}</p>
 <form action="<spring:url value="/app/order/checkout/" />" method="POST">
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-    <select class="form-control" name="addressId">
+    <p>Select address or add one on <a href="<spring:url value="/app/personalinfo.html" />">Personal Info</a> page</p>
+    <select class="form-control" name="addressId" required>
         <c:forEach items="${user.addresses}" var="address">
             <option value="${address.id}">${address.postcode} ${address.city} ${address.district} ${address.street} ${address.apartments} </option>
         </c:forEach>

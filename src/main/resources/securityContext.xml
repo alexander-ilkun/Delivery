@@ -8,6 +8,10 @@
                     http://www.springframework.org/schema/security/spring-security.xsd">
 
     <http auto-config="true" use-expressions="true">
+        <intercept-url pattern="/app/pizza/add**" access="hasRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/app/pizzas**" access="hasRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/app/checkout**" access="hasRole('ROLE_USER')" />
+        <intercept-url pattern="/app/orders**" access="hasRole('ROLE_USER')" />
         <intercept-url pattern="/app/home**" access="hasRole('ROLE_USER')" />
         <intercept-url pattern="/app/personalinfo**" access="hasRole('ROLE_USER')" />
         <form-login login-page="/app/login" default-target-url="/app/home"/>

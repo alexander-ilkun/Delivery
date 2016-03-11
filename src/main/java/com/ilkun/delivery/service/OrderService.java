@@ -20,4 +20,6 @@ public interface OrderService {
     Order save(Order order);
 
     List<Order> findOrdersByUser(User user);
+
+    List<Order> findAll();
 }

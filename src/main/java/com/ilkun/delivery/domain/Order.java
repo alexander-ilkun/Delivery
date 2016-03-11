@@ -28,10 +28,10 @@ public class Order implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User user;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "address_id")
     private Address address;
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -98,7 +98,7 @@ public class Order implements Serializable {
 
     @Override
     public String toString() {
-        return super.toString() + "Order{" + "id=" + id + ", user=" + user
+        return "Order{" + "id=" + id + ", user=" + user
                 + ", address=" + address + ", total=" + getTotalPrice() + 
                 ", type=" + type + '}';
     }

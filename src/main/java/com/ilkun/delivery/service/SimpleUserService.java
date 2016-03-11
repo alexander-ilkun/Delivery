@@ -20,33 +20,13 @@ public class SimpleUserService implements UserService {
     @Autowired
     private AddressService addressService;
     @Autowired
-    private BonusCardService bonusCardService;
-    @Autowired
     private RoleService roleService;
     
     @Override
     public User find(Long id) {
-        User user = userRepository.find(id);
-        List<Address> addresses = getAddressesByCustomer(user);
-        BonusCard bonusCard = getBonusCardByCostumer(user);
-        user.setAddresses(addresses);
-        user.setBonusCard(bonusCard);
-        return user;
+        return userRepository.find(id);
     }
     
-    private List<Address> getAddressesByCustomer(User customer) {
-        List<Address> addresses = new ArrayList<>();        
-        // TODO : find correct addresses
-        addresses.add(addressService.find(1L));
-        addresses.add(addressService.find(2L));
-        return addresses;
-    }
-
-    private BonusCard getBonusCardByCostumer(User customer) {
-        // TODO : find correct bonusCards
-        return bonusCardService.find(1L);
-    }
-
     @Override
     public User findByName(String name) {
         return userRepository.findByName(name);

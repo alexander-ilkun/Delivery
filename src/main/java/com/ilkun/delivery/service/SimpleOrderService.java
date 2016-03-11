@@ -64,4 +64,9 @@ public class SimpleOrderService implements OrderService {
     public List<Order> findOrdersByUser(User user) {
         return orderRepository.findOrdersByUser(user);
     }
+
+    @Override
+    public List<Order> findAll() {
+        return orderRepository.findAll();
+    }
 }

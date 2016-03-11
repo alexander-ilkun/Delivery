@@ -34,11 +34,10 @@ public class PizzaController {
         return "newpizza";
     }
 
-    @RequestMapping(value = "/addnew", method = RequestMethod.POST)
+    @RequestMapping(value = "/pizza/add", method = RequestMethod.POST)
     public String add(@ModelAttribute Pizza pizza) {
-        System.out.println(pizza);
         pizzaService.save(pizza);
-        return "redirect:pizzas";
+        return "redirect:/app/pizzas";
     }
 
 //    @InitBinder

@@ -1,6 +1,7 @@
 package com.ilkun.delivery.web;
 
 import com.ilkun.delivery.domain.Order;
+import com.ilkun.delivery.domain.Role;
 import com.ilkun.delivery.domain.User;
 import com.ilkun.delivery.service.AddressService;
 import com.ilkun.delivery.service.OrderService;
@@ -59,6 +60,12 @@ public class OrderController {
     @RequestMapping(value = "/orders", method = RequestMethod.GET)
     public String showOrdersByUser(Model model, Principal principal) {
         User user = userService.findByName(principal.getName());
+        for (Role role : user.getRoles()) {
+            if (role.getName().equals("ROLE_ADMIN")) {
+                model.addAttribute("orders", orderService.findAll());
+                return "orders";
+            }
+        }
         model.addAttribute("orders", orderService.findOrdersByUser(user));
         return "orders";
     }

@@ -24,6 +24,9 @@
                     <li class="${current == 'personalinfo' ? 'active' : ''}"><a href="<spring:url value="/app/personalinfo.html" />">Personal info</a></li>
                     <li class="${current == 'orders' ? 'active' : ''}"><a href="<spring:url value="/app/orders.html" />">Orders</a></li>
                 </security:authorize>
+                <security:authorize access="hasRole('ROLE_ADMIN')">
+                    <li class="${current == 'pizzas' ? 'active' : ''}"><a href="<spring:url value="/app/pizzas.html" />">Pizzas</a></li>
+                </security:authorize>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <security:authorize access="!isAuthenticated()">

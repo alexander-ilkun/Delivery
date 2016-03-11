@@ -45,4 +45,10 @@
         <put-attribute name="current" value="orders" cascade="true" />
     </definition>
     
+    <definition name="pizzas" extends="common">
+        <put-attribute name="title" value="Pizzas" />
+        <put-attribute name="body" value="/WEB-INF/jsp/pizzas.jsp" />
+        <put-attribute name="current" value="pizzas" cascade="true" />
+    </definition>
+
 </tiles-definitions>
